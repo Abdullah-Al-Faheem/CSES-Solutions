@@ -23,18 +23,13 @@ int32_t main()
         
         while(a!=b)
         {
-            if(a<b) swap(a,b);
-            
             int gap=  a-b;
             if(gap&1) gap++;
-
+            
             a-= gap;
             b-= gap/2;
         }
 
-        if(a%3==0) cout<<"YES\n";
-        else cout<<"NO\n";
-
-
+        cout<< (a%3? "NO": "YES")<<nl;
     }
 }
