@@ -9,38 +9,36 @@ using namespace std;
 #define output(arr) for(auto &it: arr) cerr<<it<<" "; cerr<<nl;
 // #define cerr if(false)cerr
 
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
     
     int n; cin >> n;
-    
-    int total = 0, curr;
+    int at = (n*n+1)/2;
 
-    int mx = n*n;
-    int mid = (n*n + 1)/2;
-
-    for (int i = 1; i <= mx; i++)
+    auto calc = [&](int mid) 
     {
-        curr=0;
-        for (int j = 1; j*j <= i; j++)
+        int cnt =0;
+        for (int i = 1; i <= n; i++)
         {
-            if(i%j == 0 and j<=n and i/j<=n) 
-            {
-                curr++;
-                if (i/j != j) curr++;
-            }
+            cnt+= min(mid,i*n)/i;
         }
 
-        cerr<<i<<": "<<curr<<nl;
-        total+= curr;
+        return cnt;
+    };
+    
+    int lft = 1, rgt = n*n, mid, ans = 0;
+    while(lft<=rgt)
+    {
+        mid = lft + (rgt-lft)/2;
+        
+        int a = calc(mid);
+        int b= calc(mid-1);
 
-        if(total>= mid)
-        {
-            cout<<i<<nl;
-            break;
-        }
+        if(at<=a and at>b){ans = mid; break;}
+        else if(a<at) lft = mid+1;
+        else rgt = mid-1;
     }
 
+    cout<<ans<<nl;
 }
