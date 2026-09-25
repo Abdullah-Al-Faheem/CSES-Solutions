@@ -13,5 +13,9 @@ int32_t main()
 {
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
 
+    int n, m; cin>>n>>m;
+
+    vector<int>arr(n+3); for (int i = 1; i <= n; i++) cin>>arr[i];
+
     
 }
